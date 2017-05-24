@@ -39,7 +39,7 @@ public class Scheduler extends Thread{
     @Override
     public void run() {
         try {
-            while(!this.isInterrupted()) {
+            while(!Thread.currentThread().isInterrupted()) {
                 for (Map.Entry<TimerId, Runnable> entry : timers.entrySet()) {
                     Duration timeout = entry.getKey().getTimeout();
                     if (timeout.isZero() || timeout.isNegative()) {
@@ -51,6 +51,8 @@ public class Scheduler extends Thread{
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
+            return;
         }
     }
 }

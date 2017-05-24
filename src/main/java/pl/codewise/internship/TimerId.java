@@ -28,14 +28,14 @@ public class TimerId extends Thread{
     @Override
     public void run() {
             try {
-                while (!isInterrupted()) {
-                    while(true) {
-                        timeout = timeout.minus(resolution);
-                        Thread.sleep(resolution.toMillis());
-                    }
+                while(!Thread.currentThread().isInterrupted()) {
+                    timeout = timeout.minus(resolution);
+                    Thread.sleep(resolution.toMillis());
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
+                return;
             }
     }
 }

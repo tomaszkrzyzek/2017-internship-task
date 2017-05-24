@@ -7,6 +7,10 @@ import java.time.Duration;
 
 public class InternshipTaskTest {
 
+    /*
+        Niestety, nie wystarczyło mi czasu na napisanie sensownych testów
+     */
+
     @Test
     public void shouldWork() {
         Scheduler scheduler = new Scheduler();
@@ -15,7 +19,11 @@ public class InternshipTaskTest {
             System.out.println("Callback");
         });
 
-        scheduler.startTimer(timerId);
-
+        try {
+            scheduler.startTimer(timerId);
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
